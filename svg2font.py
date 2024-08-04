@@ -78,7 +78,10 @@ for root, dirs, files in os.walk(args.path):
         print("Adding " + str(path) + " as " + str(c))
         add_glyph(c, path)
         # the "+ 1" is the '/' character that comes after the directory
-        cmap[c] = path[len(args.path) + 1:]
+        rel_path = path[len(args.path):]
+        if rel_path.startswith('/'):
+            rel_path = rel_path[1:]
+        cmap[c] = rel_path
         c += 1
 
 
@@ -86,8 +89,8 @@ f.generate(args.font_name + ".ttf")
 
 if args.cpp_map:
     with open(args.font_name + ".hpp", "w") as f:
-        f.write("#pragma once\n\n#include <unordered_map>\n\n")
-        f.write("const inline std::unordered_map<const char*, const char*> cmap{\n")
+        f.write("#pragma once\n\n#include <unordered_map>\n#include <string_view>\n\n")
+        f.write("const inline std::unordered_map<std::string_view, std::string_view> cmap{\n")
         for idx in cmap:
             f.write("\t{ \"" + (cmap[idx]) + "\", \"\\u" + f"{idx:04x}" + "\" },\n")
         f.write("};\n")
