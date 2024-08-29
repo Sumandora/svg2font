@@ -14,7 +14,7 @@ This step is not needed, but complex SVGs might confuse FontForge. You can use G
 
 Run the following command:
 ```shell
-inkscape icon.svg --actions="select-all;path-flatten" --export-type="svg" --export-overwrite
+inkscape *.svg --actions="select-all;path-flatten" --export-type="svg" --export-overwrite
 ```
 This command will produce a [filename]_out.svg file, which should have less render instructions.
 
@@ -28,4 +28,4 @@ You now have a font that contains all your svgs, starting at \uE000.
 The stdout should give you a clear idea of where each icon is.
 You can append `--cpp_map` if you desire to use the font in a C++ app, and you want a header that keeps track of unicode indices.
 
-If your SVG paths have the wrong winding order than you should pass `--correct_direction auto/always` depending on what works better.
+If your SVG paths have the wrong winding order then you should pass `--correct_direction auto/always` depending on what works better.
