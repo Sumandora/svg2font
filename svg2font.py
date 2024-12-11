@@ -22,7 +22,7 @@ f.fontname = args.font_name
 f.familyname = args.font_name
 f.fullname = args.font_name
 
-# The GUI tells me that TTF prefers when em is a power of 2, so I set it from 1000 to 1024
+# The GUI says that TTF prefers when em is a power of 2, so I set it from 1000 to 1024
 f.em = 1024
 
 # FontForge doesn't export unset glyphs, so set encoding to unicode so that any firstchar is valid
@@ -38,10 +38,10 @@ def width_and_height_from_svg(file):
 def add_glyph(idx, file):
     glyph = f.createMappedChar(idx)
 
-    # I don't know what FontForge scales with, because it is definitely not just the width/height
-    # of the glyph. I disable it, because I need to know the width and height of the imported glyph
+    # FontForge scales with something that isn't the width/height, just disable it.
     glyph.importOutlines(file, scale=False, correctdir=True, removeoverlap=True)
 
+    # The glyph needs to be scaled manually, so the width/height are needed
     width, height = width_and_height_from_svg(file)
 
     aspect_ratio = width / float(height)
