@@ -1,7 +1,7 @@
 # svg2font
 
 ## Dependencies
-- [FontForge](https://fontforge.org)
+- [FontForge](https://fontforge.org) (You also need its Python API)
 - [svgelements](https://pypi.org/project/svgelements/)
 
 ## Guide
